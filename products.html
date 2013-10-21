@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/freebase/suggest/4_2/suggest.min.css" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/freebase/suggest/4_2/suggest.min.js"></script>
+  </head>
+  <body>
+    <script>
+    /*
+      var query = [{'id': null, 'name': null, 'domain': '/food'}];
+      var service_url = 'https://www.googleapis.com/freebase/v1/search';
+      $.getJSON(service_url + '?callback=?', {query:JSON.stringify(query)}, function(response) {
+      	console.log(response.result);
+        $.each(response.result, function(i,planet){
+          $('<div>',{text:planet.name}).appendTo(document.body);
+        });
+      });*/
+    </script>
+
+    <script>
+  var service_url = 'https://www.googleapis.com/freebase/v1/search';
+  var params = {
+    'query': 'cola',
+    'filter': '(all domain:/food)',
+    'limit': 10,
+    'indent': false
+  };
+  $.getJSON(service_url + '?callback=?', params, function(response) {
+    $.each(response.result, function(i, result) {
+      $('<div>', {text:result['name']}).appendTo(document.body);
+    });
+  });
+</script>
+<script type="text/javascript">
+$(function() {
+  $("#myinput").suggest({filter:'(all domain:/food)'});
+});
+</script>
+
+<input type="text" id="myinput"/>
+  </body>
+</html>

@@ -1,0 +1,61 @@
+MQL queries
+https://www.youtube.com/watch_popup?feature=player_embedded&v=1oCeLaCjfO0
+
+/*
+*****************************
+	Give me the unique object "/m/01yvs" witch is coca cola plus some properies
+*/
+{
+	"id":"/m/01yvs", 
+	"/type/object/name":
+		[
+			{}
+		], 
+	"/common/topic/alias":
+		[
+			{}
+		], 
+	"/type/object/id":
+		[
+			{}
+		], 
+	"/common/topic/description":
+		[
+			{}
+		], 
+	"*":
+		[
+			{}
+		]
+}
+
+
+https://www.googleapis.com/freebase/v1/mqlread?query={"id":"/m/01yvs", "/type/object/name":[{}], "/common/topic/alias":[{}], "/type/object/id":[{}], "/common/topic/description":[{}], "*":[{}]}
+
+
+/*
+*****************************
+	query the "type/type" of object "people/people" and show me its properties
+*/
+
+{
+	"id":"/people/person",
+	"type":"/type/type",
+	"properties": []
+}
+
+https://www.googleapis.com/freebase/v1/mqlread?query={"id":"/people/person","type":"/type/type","properties": []}
+
+
+/*
+*****************************
+	give me expected type of the property place_of_birth
+*/
+
+{
+	"id":"/people/person/place_of_birth",
+	"type":"/type/property",
+	"expected_type":null
+}
+
+https://www.googleapis.com/freebase/v1/mqlread?query={"id":"/people/person/place_of_birth","type":"/type/property","expected_type":null}
