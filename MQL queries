@@ -1,5 +1,7 @@
 MQL queries
 https://www.youtube.com/watch_popup?feature=player_embedded&v=1oCeLaCjfO0
+http://io2011.freebaseapps.com/
+http://io2011.freebaseapps.com/presentation-queries
 
 /*
 *****************************
@@ -59,3 +61,49 @@ https://www.googleapis.com/freebase/v1/mqlread?query={"id":"/people/person","typ
 }
 
 https://www.googleapis.com/freebase/v1/mqlread?query={"id":"/people/person/place_of_birth","type":"/type/property","expected_type":null}
+
+/*
+*****************************
+	jane austen with link
+*/
+
+{
+	"id":"/en/jane_austen",
+	"type": [{
+		"link":{
+			"timestamp":null,
+			"operation":null,
+			"valid":null
+		},
+		"id":null,
+		"sort":"link.timestamp"
+	}]
+}
+
+https://www.googleapis.com/freebase/v1/mqlread?query={"id":"/en/jane_austen","type": [{"sort":"link.timestamp","id":null,"link":{"timestamp":null,"operation":null,"valid":null}}]}
+
+/*
+*****************************
+	return all (60) beverages
+*/
+[{
+  "id": null,
+  "limit": 60,
+  "name": null,
+  "type": "/food/beverage"
+}]
+
+
+
+/*
+*****************************
+	search for cola
+*/
+https://www.googleapis.com/freebase/v1/search?query=cola
+
+/*
+*****************************
+	search for fanta with with type /food/beverage
+*/
+https://www.googleapis.com/freebase/v1/search?query=fanta&filter=(any%20type:/food/beverage)
+https://www.googleapis.com/freebase/v1/search?query=fanta&filter=(any%20type:/food/food)

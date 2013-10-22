@@ -1,5 +1,5 @@
 console.log("hello");
-$(function() {
-  $("#myinput").suggest({filter:'(all type:/film/director)'});
+$("#outputField").change(function() {
+  alert( "Handler for .change() called." );
 });
 
