@@ -1,0 +1,12 @@
+http://wiki.openstreetmap.org/wiki/Overpass_API/Language_Guide
+jsonp and cors proxy http://jsonp.jit.su/?callback=&url=
+/*
+*****************************
+	search for nodes
+	in bbox (50.6,7.0,50.8,7.3)
+	output = json
+	node key = shop
+	node name = ~ [pP]enk (this is a regex and means find Penk or penk in the name )
+*/
+
+http://overpass.osm.rambler.ru/cgi/interpreter?data=[out:json];node[shop][name~"[pP]enk"](50.6,7.0,50.8,7.3);out;
