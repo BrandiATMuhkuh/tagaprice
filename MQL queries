@@ -107,3 +107,19 @@ https://www.googleapis.com/freebase/v1/search?query=cola
 */
 https://www.googleapis.com/freebase/v1/search?query=fanta&filter=(any%20type:/food/beverage)
 https://www.googleapis.com/freebase/v1/search?query=fanta&filter=(any%20type:/food/food)
+
+
+/*
+*****************************
+	get back nearly everything from an id (01yvs = coca cola)
+	http://www.freebase.com/m/01yvs
+*/
+https://www.googleapis.com/freebase/v1/topic/m/01yvs
+
+/*
+*****************************
+	get back everything from an id (018vnz = Corn flakes)
+	comes with bar code
+	https://www.googleapis.com/freebase/v1/topic/m/018vnz?filter=allproperties
+*/
+https://www.googleapis.com/freebase/v1/topic/m/018vnz?filter=allproperties

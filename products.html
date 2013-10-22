@@ -38,6 +38,7 @@
 </div>
 
 <script>
+var globali = null;
 var serachField = document.getElementById("serachField");
 var outputField = document.getElementById("outputField");
 var detailsDiv = document.getElementById("detailsDiv");
@@ -70,8 +71,8 @@ function getProduct(ask){
 function createEntryWithLink(results){
 	var myObjs = $('<div>' + results.name +'</div>');
 	$(myObjs).click(function() {
-		
-		fillDetails(results);
+		fillAjaxDetails(results.mid);
+		//fillDetails(results);
 	});
 
 	$(myObjs).appendTo(outputField);
@@ -79,17 +80,16 @@ function createEntryWithLink(results){
 
 function fillDetails(details){
 	$(detailsDiv).empty();
-	console.log(details);
+	globali = details;
+	//console.log(details);
 	var myDtails = "<div><table>";
-	myDtails+=retNiceTable("name", details.name);
-	myDtails+=retNiceTable("id", details.id);
-	myDtails+=retNiceTable("mid", details.mid);
+	myDtails+=retNiceTable("name", details["/type/object/name"].values[0].text);
+	myDtails+=retNiceTable("Incredience", '');
+	myDtails+=retIngredients(details);
+	myDtails+=retNutrients(details);
+	//myDtails+=retNiceTable("mid", details.mid);
 
 	//categories
-	var a = details.output.all["category./business/consumer_product/category"]; 
-	for(i in a){
-		myDtails+=retNiceTable("category", a[i].name);
-	}
 
 	myDtails+="</table></div>";
 	
@@ -98,6 +98,48 @@ function fillDetails(details){
 
 function retNiceTable(name, value){
 	return "<tr><th>"+name+":</th><td>"+value+"</td></tr>";
+}
+
+function retIngredients(details){
+	//console.log(details["/business/product_with_ingredients/ingredients"]);
+	if(details["/business/product_with_ingredients/ingredients"]){
+		var vals = details["/business/product_with_ingredients/ingredients"].values;
+		var sum = '';
+		for (i in vals){
+			sum += retNiceTable("inc", vals[i].text);
+		}
+
+		return sum;
+	}
+	return '';
+	
+}
+
+function retNutrients(details){
+	//console.log(details["/business/product_with_ingredients/ingredients"]);
+	if(details["/food/food/nutrients"]){
+		var vals = details["/food/food/nutrients"].values;
+		var sum = '';
+		for (i in vals){
+			sum += retNiceTable(vals[i].property["/food/nutrition_fact/nutrient"].values[0].text, vals[i].property["/food/nutrition_fact/quantity"].values[0].text);
+		}
+
+		return sum;
+	}
+	return '';
+	
+}
+
+function fillAjaxDetails(mid){
+	//https://www.googleapis.com/freebase/v1/topic/m/018vnz?filter=allproperties
+	var service_url = 'https://www.googleapis.com/freebase/v1/topic'+mid;
+	  var params = {
+	    'filter': 'allproperties'
+	  };
+	  $.getJSON(service_url + '?callback=?', params, function(response) {
+	    //console.log(response);
+	    fillDetails(response.property);
+	  });
 }
 </script>
   </body>
